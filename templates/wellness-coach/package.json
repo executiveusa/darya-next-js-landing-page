@@ -1,0 +1,7 @@
+{
+  "name": "wellness-coach",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite"
+  }
+}

@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: theme("fontFamily.sans");
+  background: radial-gradient(circle at 20% 20%, rgba(78, 241, 229, 0.1), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(255, 119, 233, 0.15), transparent 45%),
+    #050608;
+}
+
+a {
+  color: theme("colors.primary");
+}
+
+a:focus {
+  outline: 2px dashed theme("colors.secondary");
+  outline-offset: 2px;
+}
+
+.glass-panel {
+  background: rgba(15, 18, 32, 0.75);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(78, 241, 229, 0.18);
+  box-shadow: 0 0 30px rgba(78, 241, 229, 0.1);
+}
