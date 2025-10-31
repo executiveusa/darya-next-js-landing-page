@@ -75,3 +75,20 @@ This starter use [`npm:gsap-trial`](https://www.npmjs.com/package/gsap-trial). I
 - `useUnsavedChanges` - Prompt the user if they try and leave with unsaved changes
 - `useWindowLocation` - This React Hook retrieves window location
 - `useWindowSize` - This React Hook retrives window dimensions also works on resize
+
+---
+
+## Synthia-3.0 Frontend Notes
+
+This repository now tracks the Synthia-3.0 frontend package. Key resources:
+
+- `/docs/PRD.md` – product requirements.
+- `/docs/architecture.md` – technical architecture and flows.
+- `/docs/component-inventory.md` – reusable UI catalog.
+- `/docs/inspo.md` – inspiration and competitive research.
+- `/templates` – placeholder for Bootstrap-based template archives.
+- `.github/workflows/frontend.yml` – CI pipeline.
+- `Dockerfile.frontend` & `docker-compose.yaml` – containerized workflows.
+
+Follow Krug heuristics and Synthia accessibility rules when adding new pages or components. CI will be expanded to run Lighthouse + axe audits via Playwright MCP.
+
