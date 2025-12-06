@@ -41,9 +41,6 @@ memory = 512
 minReplicas = 1
 maxReplicas = 1
 
-# Monitoring markers for usage tracking
-[monitoring]
-enabled = true
-check_interval = 3600
-alert_on_usage_spike = true
-free_tier_ceiling = 0.8
+# Note: For usage monitoring, use the included script:
+#   npm run check-usage
+# Railway does not support custom [monitoring] sections in railway.toml

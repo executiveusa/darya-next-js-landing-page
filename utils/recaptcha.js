@@ -34,7 +34,9 @@ export const validateRecaptcha = async (token, res) => {
         throw new Error(`Error validating captcha: ${result['error-codes'][0]}`);
 
     } catch (err) {
-        res.status(422).json({ message: err.message });
+        if (res && typeof res.status === 'function') {
+            res.status(422).json({ message: err.message });
+        }
         return false;
     }
 };
