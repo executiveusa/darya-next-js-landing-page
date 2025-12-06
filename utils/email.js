@@ -1,6 +1,9 @@
 import sendGrid from '@sendgrid/mail';
 
-sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
+// Zero-Secrets: Only set API key if it exists
+if (process.env.SENDGRID_API_KEY) {
+    sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
+}
 
 /**
  * Documentation
@@ -13,7 +16,7 @@ module.exports = class Email {
         this.siteName = process.env.NEXT_PUBLIC_SITE_NAME;
         this.host = process.env.NEXT_PUBLIC_BASE_URL;
         this.template = template;
-        this.labels = labels
+        this.labels = labels;
         this.fields = fields;
         this.to = process.env.EMAIL_FROM;
         this.from = {
@@ -28,6 +31,25 @@ module.exports = class Email {
      * Sends the email with sendgrid
      */
     async send() {
+        // Zero-Secrets: Check if SendGrid is configured
+        if (!process.env.SENDGRID_API_KEY) {
+            console.log('📧 [EMAIL STUB] Email would be sent (SendGrid not configured):');
+            console.log('   To:', this.to);
+            console.log('   From:', this.from);
+            console.log('   Subject:', this.subject);
+            console.log('   Fields:', JSON.stringify(this.fields, null, 2));
+            
+            if (this.attachments && this.attachments.length > 0) {
+                console.log('   Attachments:', this.attachments.length, 'file(s)');
+            }
+            
+            return {
+                success: true,
+                stub: true,
+                message: 'Email logged to console (SendGrid not configured)'
+            };
+        }
+
         const mailOptions = {
             to: this.to,
             from: {

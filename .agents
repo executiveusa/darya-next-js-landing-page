@@ -1,0 +1,99 @@
+{
+  "project": "darya-next-js-landing-page",
+  "description": "Next.js landing page with GSAP animations, form handling, and email integration",
+  "core": [
+    {
+      "name": "NEXT_PUBLIC_BASE_URL",
+      "description": "Base URL for the application",
+      "required": true,
+      "format": "https://your-domain.com",
+      "default": "http://localhost:3000",
+      "category": "app"
+    },
+    {
+      "name": "NEXT_PUBLIC_SITE_NAME",
+      "description": "Name of the site displayed in emails and metadata",
+      "required": true,
+      "format": "string",
+      "default": "Next.js Starter",
+      "category": "app"
+    }
+  ],
+  "optional": [
+    {
+      "name": "SENDGRID_API_KEY",
+      "description": "SendGrid API key for email sending functionality",
+      "required": false,
+      "format": "SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "default": "",
+      "category": "email",
+      "provider": "sendgrid",
+      "docs": "https://docs.sendgrid.com/api-reference/how-to-use-the-sendgrid-v3-api/authentication",
+      "stub_behavior": "Form submissions will be logged but emails will not be sent"
+    },
+    {
+      "name": "EMAIL_FROM",
+      "description": "Email address for sending and receiving form submissions",
+      "required": false,
+      "format": "email@example.com",
+      "default": "noreply@example.com",
+      "category": "email",
+      "stub_behavior": "Uses default placeholder email"
+    },
+    {
+      "name": "NEXT_PUBLIC_RECAPTCHA_SITE_KEY",
+      "description": "Google reCAPTCHA v3 site key for form protection",
+      "required": false,
+      "format": "6LeXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "default": "",
+      "category": "security",
+      "provider": "google",
+      "docs": "https://www.google.com/recaptcha/about/",
+      "stub_behavior": "Form will work without reCAPTCHA validation"
+    },
+    {
+      "name": "RECAPTCHA_SECRET_KEY",
+      "description": "Google reCAPTCHA v3 secret key for server-side verification",
+      "required": false,
+      "format": "6LeXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "default": "",
+      "category": "security",
+      "provider": "google",
+      "docs": "https://www.google.com/recaptcha/about/",
+      "stub_behavior": "Server-side validation will be skipped"
+    }
+  ],
+  "required_secrets": [
+    "NEXT_PUBLIC_BASE_URL",
+    "NEXT_PUBLIC_SITE_NAME"
+  ],
+  "optional_secrets": [
+    "SENDGRID_API_KEY",
+    "EMAIL_FROM",
+    "NEXT_PUBLIC_RECAPTCHA_SITE_KEY",
+    "RECAPTCHA_SECRET_KEY"
+  ],
+  "schema": {
+    "version": "1.0",
+    "format": "json",
+    "categories": {
+      "app": "Application configuration",
+      "email": "Email service integration (SendGrid)",
+      "security": "Security and anti-spam (Google reCAPTCHA)"
+    },
+    "stub_mode": {
+      "enabled": true,
+      "description": "Application can run without optional secrets with reduced functionality",
+      "fallback_strategy": "Log actions to console instead of executing external API calls"
+    }
+  },
+  "deployment": {
+    "platform": "railway",
+    "cost_tier": "free",
+    "resource_limits": {
+      "memory": "512MB",
+      "cpu": "0.5",
+      "instances": 1
+    }
+  }
+}
