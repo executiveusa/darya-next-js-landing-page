@@ -22,30 +22,39 @@ const MAINTENANCE_MODE_FILE = 'maintenance.html';
 
 /**
  * Check Railway usage via CLI
- * Note: This is a placeholder implementation.
- * Actual implementation would use Railway API.
+ * 
+ * TODO: This is a PLACEHOLDER implementation with hardcoded values.
+ * To enable actual monitoring:
+ *   1. Install Railway CLI: npm install -g @railway/cli
+ *   2. Authenticate: railway login
+ *   3. Use Railway API to fetch real usage metrics
+ *   4. Replace hardcoded values below with API response
+ * 
+ * Railway API Documentation: https://docs.railway.app/reference/api-reference
  */
 async function checkRailwayUsage() {
     console.log('🔍 Checking Railway usage...');
     
-    // Placeholder: In real implementation, this would:
-    // 1. Call Railway API to get current usage
-    // 2. Compare against free-tier limits
-    // 3. Return usage metrics
+    // PLACEHOLDER: Replace these hardcoded values with Railway API calls
+    // In production, this would:
+    // 1. Call Railway GraphQL API to get current usage
+    // 2. Parse usage metrics from API response
+    // 3. Compare against free-tier limits
+    // 4. Return actual usage metrics
     
     const usage = {
         memory: {
-            used: 0.45, // 45% of limit
+            used: 0.45, // PLACEHOLDER: 45% of limit
             limit: 512, // MB
         },
         cpu: {
-            used: 0.30, // 30% of limit
+            used: 0.30, // PLACEHOLDER: 30% of limit
         },
         bandwidth: {
-            used: 0.60, // 60% of limit
+            used: 0.60, // PLACEHOLDER: 60% of limit
         },
         buildMinutes: {
-            used: 0.50, // 50% of limit
+            used: 0.50, // PLACEHOLDER: 50% of limit
         }
     };
     

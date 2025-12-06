@@ -5,6 +5,9 @@
  * It logs validation attempts to console instead of making actual API calls.
  */
 
+// Constants
+const TOKEN_PREVIEW_LENGTH = 20; // Number of characters to show in token preview
+
 /**
  * Verify the reCAPTCHA token (stubbed version)
  * 
@@ -17,7 +20,7 @@ export async function verifyRecaptcha(token) {
     
     if (!secretKey) {
         console.log('🔒 [RECAPTCHA STUB] Validation skipped (reCAPTCHA not configured):');
-        console.log('   Token received:', token ? token.substring(0, 20) + '...' : 'null');
+        console.log('   Token received:', token ? token.substring(0, TOKEN_PREVIEW_LENGTH) + '...' : 'null');
         console.log('   Result: Auto-approved (stub mode)');
         
         return {
