@@ -78,6 +78,60 @@ This starter use [`npm:gsap-trial`](https://www.npmjs.com/package/gsap-trial). I
 
 ---
 
+## Railway Zero-Secrets Deployment ⚡
+
+This project implements a **Railway Zero-Secrets Architecture** that allows deployment without any external API keys. The application runs with reduced functionality (stubs) when optional integrations are not configured.
+
+### 🚀 Quick Deploy to Railway
+
+1. **One-Click Deploy**: [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
+2. **No Secrets Required**: Application boots successfully without any external API keys
+3. **Cost Protected**: Automatic free-tier guardrails prevent overspending
+
+### 📋 Key Features
+
+- ✅ **Zero-Secrets Bootstrap**: Deploy immediately without SendGrid or reCAPTCHA
+- 🔒 **Smart Stubs**: Forms work, emails logged to console (when SendGrid not configured)
+- 💰 **Cost Guardrails**: Resource limits enforce free-tier compliance (512MB RAM, 1 instance)
+- 📊 **Usage Monitoring**: `npm run check-usage` tracks Railway resource consumption
+- 🔄 **Coolify Migration**: Ready-to-use migration path when Railway limits reached
+- 🛠️ **Maintenance Mode**: Pre-built `maintenance.html` for service suspension
+
+### 📖 Documentation
+
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide for Railway
+- **[.agents](./.agents)** - Machine-readable secret specifications for automation
+- **[COOLIFY_SUPPORT.md](./COOLIFY_SUPPORT.md)** - Coolify deployment configuration
+- **[COOLIFY_MIGRATION.md](./COOLIFY_MIGRATION.md)** - Railway to Coolify migration guide
+- **[.env.railway.example](./.env.railway.example)** - Railway environment variable template
+
+### 🔐 Secret Management
+
+**Local Development:**
+```bash
+# Copy example environment file
+cp .env.example .env
+
+# Application works without optional secrets
+npm run dev  # Runs on http://localhost:3000
+```
+
+**Production (Railway):**
+- Required: `NEXT_PUBLIC_BASE_URL`, `NEXT_PUBLIC_SITE_NAME` (auto-populated)
+- Optional: `SENDGRID_API_KEY`, `EMAIL_FROM`, `RECAPTCHA` keys
+- See [DEPLOYMENT.md](./DEPLOYMENT.md) for full details
+
+### 🧪 Testing Without Secrets
+
+```bash
+npm install
+npm run dev
+# Submit a form - email will be logged to console
+# reCAPTCHA validation automatically skipped
+```
+
+---
+
 ## Synthia-3.0 Frontend Notes
 
 This repository now tracks the Synthia-3.0 frontend package. Key resources:

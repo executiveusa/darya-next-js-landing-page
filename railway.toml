@@ -1,0 +1,49 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npm run build"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Cost Protection Guardrails
+# These settings ensure the application stays within free-tier limits
+
+[build.env]
+NODE_ENV = "production"
+
+[deploy.env]
+# Core application settings (required)
+NEXT_PUBLIC_BASE_URL = "${{RAILWAY_PUBLIC_DOMAIN}}"
+NEXT_PUBLIC_SITE_NAME = "Next.js Starter"
+
+# Email settings (optional - stubbed if not provided)
+EMAIL_FROM = "${{EMAIL_FROM}}"
+SENDGRID_API_KEY = "${{SENDGRID_API_KEY}}"
+
+# reCAPTCHA settings (optional - disabled if not provided)
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "${{NEXT_PUBLIC_RECAPTCHA_SITE_KEY}}"
+RECAPTCHA_SECRET_KEY = "${{RECAPTCHA_SECRET_KEY}}"
+
+# Resource limits to stay within free tier
+NODE_OPTIONS = "--max-old-space-size=512"
+
+[deploy.resourceLimits]
+# Hard limits to prevent cost overruns
+memory = 512
+# CPU is implicitly limited by memory allocation
+
+[deploy.scaling]
+# Disable auto-scaling to prevent cost overruns
+minReplicas = 1
+maxReplicas = 1
+
+# Monitoring markers for usage tracking
+[monitoring]
+enabled = true
+check_interval = 3600
+alert_on_usage_spike = true
+free_tier_ceiling = 0.8

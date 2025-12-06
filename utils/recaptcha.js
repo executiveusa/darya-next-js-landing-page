@@ -8,6 +8,12 @@
  * @returns true or false
  */
 export const validateRecaptcha = async (token, res) => {
+    // Zero-Secrets: Skip validation if reCAPTCHA not configured
+    if (!process.env.RECAPTCHA_SECRET_KEY) {
+        console.log('🔒 [RECAPTCHA STUB] Validation skipped (reCAPTCHA not configured)');
+        return true; // Allow form submission without reCAPTCHA
+    }
+
     try {
         const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
             method: 'POST',

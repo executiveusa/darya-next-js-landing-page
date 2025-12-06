@@ -54,8 +54,30 @@ export default function App({ Component, pageProps }) {
     /* Temporary fix to avoid flash of unstyled content (FOUC) during route transitions */
     useNextCssRemovalPrevention();
 
-    return (
+    // Zero-Secrets: Conditionally wrap with GoogleReCaptchaProvider only if key exists
+    const content = (
         <ThemeProvider disableTransitionOnChange>
+            <TransitionContextProvider>
+                <NavigationContextProvider>
+                    <style jsx global>
+                        {`
+                            :root {
+                                --font-primary: ${roboto.style.fontFamily};
+                                --font-secondary: ${victorMono.style.fontFamily};
+                            }
+                        `}
+                    </style>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </NavigationContextProvider>
+            </TransitionContextProvider>
+        </ThemeProvider>
+    );
+
+    // Only enable reCAPTCHA provider if site key is configured
+    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+        return (
             <GoogleReCaptchaProvider
                 reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                 scriptProps={{
@@ -64,22 +86,10 @@ export default function App({ Component, pageProps }) {
                     appendTo: 'body'
                 }}
             >
-                <TransitionContextProvider>
-                    <NavigationContextProvider>
-                        <style jsx global>
-                            {`
-                                :root {
-                                    --font-primary: ${roboto.style.fontFamily};
-                                    --font-secondary: ${victorMono.style.fontFamily};
-                                }
-                            `}
-                        </style>
-                        <Layout>
-                            <Component {...pageProps} />
-                        </Layout>
-                    </NavigationContextProvider>
-                </TransitionContextProvider>
+                {content}
             </GoogleReCaptchaProvider>
-        </ThemeProvider>
-    )
+        );
+    }
+
+    return content;
 }

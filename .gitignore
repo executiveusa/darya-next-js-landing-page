@@ -4,6 +4,11 @@
 .env
 .env.*
 !.env.example
+!.env.railway.example
+
+# Railway Zero-Secrets: Master secrets file (NEVER commit)
+master.secrets.json
+master.secrets.*.json
 
 # Dependencies
 /node_modules
